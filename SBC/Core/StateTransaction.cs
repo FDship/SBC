@@ -8,7 +8,9 @@ using System.IO;
 using System.Linq;
 
 namespace SBC.Core
-{
+{/// <summary>
+/// 
+/// </summary>
     public class StateTransaction : Transaction
     {
         public StateDescriptor[] Descriptors;

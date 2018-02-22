@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace SBC.Core
 {
+    /// <summary>
+    /// 用于报名成为共识候选人的特殊交易
+    /// </summary>
     [Obsolete]
     public class EnrollmentTransaction : Transaction
     {

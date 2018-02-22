@@ -37,7 +37,7 @@ namespace SBC.Core
         public static readonly RegisterTransaction GoverningToken = new RegisterTransaction
         {
             AssetType = AssetType.GoverningToken,
-            Name = "[{\"lang\":\"zh-CN\",\"name\":\"小蚁股\"},{\"lang\":\"en\",\"name\":\"AntShare\"}]",
+            Name = "[{\"lang\":\"zh-CN\",\"name\":\"船票\"},{\"lang\":\"en\",\"name\":\"ShipTicket\"}]",
             Amount = Fixed8.FromDecimal(100000000),
             Precision = 0,
             Owner = Cryptography.ECC.ECCurve.Secp256r1.Infinity,
@@ -51,7 +51,7 @@ namespace SBC.Core
         public static readonly RegisterTransaction UtilityToken = new RegisterTransaction
         {
             AssetType = AssetType.UtilityToken,
-            Name = "[{\"lang\":\"zh-CN\",\"name\":\"小蚁币\"},{\"lang\":\"en\",\"name\":\"AntCoin\"}]",
+            Name = "[{\"lang\":\"zh-CN\",\"name\":\"船币\"},{\"lang\":\"en\",\"name\":\"ShipCoin\"}]",
             Amount = Fixed8.FromDecimal(GenerationAmount.Sum(p => p) * DecrementInterval),
             Precision = 8,
             Owner = ECCurve.Secp256r1.Infinity,
@@ -69,7 +69,7 @@ namespace SBC.Core
         public static readonly Block GenesisBlock = new Block
         {
             PrevHash = UInt256.Zero,
-            Timestamp = (new DateTime(2016, 7, 15, 15, 8, 21, DateTimeKind.Utc)).ToTimestamp(),
+            Timestamp = (new DateTime(2018, 2, 15, 0, 0, 0, DateTimeKind.Utc)).ToTimestamp(),
             Index = 0,
             ConsensusData = 2083236893, //向比特币致敬
             NextConsensus = GetConsensusAddress(StandbyValidators),
@@ -340,7 +340,11 @@ namespace SBC.Core
                 return _validators.ToArray();
             }
         }
-
+        /// <summary>
+        /// 获取记账人列表
+        /// </summary>
+        /// <param name="others"></param>
+        /// <returns></returns>
         public virtual IEnumerable<ECPoint> GetValidators(IEnumerable<Transaction> others)
         {
             DataCache<UInt160, AccountState> accounts = GetStates<UInt160, AccountState>();
@@ -364,10 +368,10 @@ namespace SBC.Core
                 }
                 foreach (var group in tx.Inputs.GroupBy(p => p.PrevHash))
                 {
-                    Transaction tx_prev = GetTransaction(group.Key, out int height);
+                    Transaction tx_prev = GetTransaction(group.Key, out int height);//找到输入对应的输出的交易
                     foreach (CoinReference input in group)
                     {
-                        TransactionOutput out_prev = tx_prev.Outputs[input.PrevIndex];
+                        TransactionOutput out_prev = tx_prev.Outputs[input.PrevIndex];//找到交易输出
                         AccountState account = accounts.GetAndChange(out_prev.ScriptHash);
                         if (out_prev.AssetId.Equals(GoverningToken.Hash))
                         {
