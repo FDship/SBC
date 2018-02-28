@@ -8,6 +8,9 @@ namespace SBC.Core
     {
         public UInt256 TransactionHash;
         public uint TransactionHeight;
+        /// <summary>
+        /// 待明确
+        /// </summary>
         public Dictionary<ushort, uint> Items;
 
         public override int Size => base.Size + TransactionHash.Size + sizeof(uint)

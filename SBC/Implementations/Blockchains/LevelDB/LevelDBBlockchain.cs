@@ -314,15 +314,23 @@ namespace SBC.Implementations.Blockchains.LevelDB
         {
             return GetTransaction(ReadOptions.Default, hash, out height);
         }
-
+        /// <summary>
+        /// 根据hash 获取交易+高度
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="hash">哈希值</param>
+        /// <param name="height">高度</param>
+        /// <returns>交易</returns>
         private Transaction GetTransaction(ReadOptions options, UInt256 hash, out int height)
         {
             Slice value;
-            if (db.TryGet(options, SliceBuilder.Begin(DataEntryPrefix.DATA_Transaction).Add(hash), out value))
+           
+            if (db.TryGet(options, SliceBuilder.Begin(DataEntryPrefix.DATA_Transaction).Add(hash), out value))//通过hash获取高度+交易
             {
                 byte[] data = value.ToArray();
-                height = data.ToInt32(0);
-                return Transaction.DeserializeFrom(data, sizeof(uint));
+               
+                height = data.ToInt32(0);//获得高度
+                return Transaction.DeserializeFrom(data, sizeof(uint));//获得交易
             }
             else
             {

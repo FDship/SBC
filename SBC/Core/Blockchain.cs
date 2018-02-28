@@ -37,7 +37,7 @@ namespace SBC.Core
         public static readonly RegisterTransaction GoverningToken = new RegisterTransaction
         {
             AssetType = AssetType.GoverningToken,
-            Name = "[{\"lang\":\"zh-CN\",\"name\":\"船票\"},{\"lang\":\"en\",\"name\":\"ShipTicket\"}]",
+            Name = "[{\"lang\":\"zh-CN\",\"name\":\"船证\"},{\"lang\":\"en\",\"name\":\"ShipStock\"}]",
             Amount = Fixed8.FromDecimal(100000000),
             Precision = 0,
             Owner = Cryptography.ECC.ECCurve.Secp256r1.Infinity,
@@ -69,7 +69,7 @@ namespace SBC.Core
         public static readonly Block GenesisBlock = new Block
         {
             PrevHash = UInt256.Zero,
-            Timestamp = (new DateTime(2018, 2, 15, 0, 0, 0, DateTimeKind.Utc)).ToTimestamp(),
+            Timestamp = (new DateTime(2018, 2, 16, 0, 0, 0, DateTimeKind.Utc)).ToTimestamp(),
             Index = 0,
             ConsensusData = 2083236893, //向比特币致敬
             NextConsensus = GetConsensusAddress(StandbyValidators),
@@ -126,7 +126,7 @@ namespace SBC.Core
         /// <summary>
         /// 默认的区块链实例
         /// </summary>
-        public static Blockchain Default { get; private set; } = null;
+        public static Blockchain Default { get => s_default; private set => s_default = value; }
         /// <summary>
         /// 区块头高度
         /// </summary>
@@ -153,7 +153,12 @@ namespace SBC.Core
         /// </summary>
         /// <param name="headers">要添加的区块头列表</param>
         protected internal abstract void AddHeaders(IEnumerable<Header> headers);
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputs"></param>
+        /// <param name="ignoreClaimed"></param>
+        /// <returns></returns>
         public static Fixed8 CalculateBonus(IEnumerable<CoinReference> inputs, bool ignoreClaimed = true)
         {
             List<SpentCoin> unclaimed = new List<SpentCoin>();
@@ -325,6 +330,8 @@ namespace SBC.Core
         }
 
         private List<ECPoint> _validators = new List<ECPoint>();
+        private static Blockchain s_default = null;
+
         /// <summary>
         /// 获取下一个区块的记账人列表
         /// </summary>

@@ -74,7 +74,13 @@ namespace SBC.IO.Data.LevelDB
             Native.leveldb_put(handle, options.handle, key.buffer, (UIntPtr)key.buffer.Length, value.buffer, (UIntPtr)value.buffer.Length, out error);
             NativeHelper.CheckError(error);
         }
-
+        /// <summary>
+        /// 查询db
+        /// </summary>
+        /// <param name="options">操作类型</param>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
+        /// <returns></returns>
         public bool TryGet(ReadOptions options, Slice key, out Slice value)
         {
             UIntPtr length;
