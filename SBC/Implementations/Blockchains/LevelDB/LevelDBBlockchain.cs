@@ -21,6 +21,9 @@ namespace SBC.Implementations.Blockchains.LevelDB
 
         private DB db;
         private Thread thread_persistence;
+        /// <summary>
+        /// 块头hash列表
+        /// </summary>
         private List<UInt256> header_index = new List<UInt256>();
         private Dictionary<UInt256, Header> header_cache = new Dictionary<UInt256, Header>();
         private Dictionary<UInt256, Block> block_cache = new Dictionary<UInt256, Block>();

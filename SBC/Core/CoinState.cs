@@ -2,6 +2,9 @@
 
 namespace SBC.Core
 {
+    /// <summary>
+    /// 币状态
+    /// </summary>
     [Flags]
     public enum CoinState : byte
     {
