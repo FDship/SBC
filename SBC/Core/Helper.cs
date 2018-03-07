@@ -37,7 +37,11 @@ namespace SBC.Core
                 return Crypto.Default.Sign(verifiable.GetHashData(), key.PrivateKey, key.PublicKey.EncodePoint(false).Skip(1).ToArray());
             }
         }
-
+        /// <summary>
+        /// 通过Hash转成160位
+        /// </summary>
+        /// <param name="script"></param>
+        /// <returns></returns>
         public static UInt160 ToScriptHash(this byte[] script)
         {
             return new UInt160(Crypto.Default.Hash160(script));
