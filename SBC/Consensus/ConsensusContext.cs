@@ -16,15 +16,24 @@ namespace SBC.Consensus
         public UInt256 PrevHash;
         public uint BlockIndex;
         public byte ViewNumber;
+        /// <summary>
+        /// 记账人列表
+        /// </summary>
         public ECPoint[] Validators;
         public int MyIndex;
         public uint PrimaryIndex;
         public uint Timestamp;
         public ulong Nonce;
-        public UInt160 NextConsensus;
+        /// <summary>
+        /// 区块的记账合约的散列值（多签名兑现脚本散列值）
+        /// </summary>
+        public UInt160 ConsensusAddress;
         public UInt256[] TransactionHashes;
         public Dictionary<UInt256, Transaction> Transactions;
         public byte[][] Signatures;
+        /// <summary>
+        /// 期望视图列表
+        /// </summary>
         public byte[] ExpectedView;
         public KeyPair KeyPair;
 
@@ -66,7 +75,7 @@ namespace SBC.Consensus
                     Timestamp = Timestamp,
                     Index = BlockIndex,
                     ConsensusData = Nonce,
-                    NextConsensus = NextConsensus,
+                    ConsensusAddress = ConsensusAddress,
                     Transactions = new Transaction[0]
                 };
             }
@@ -92,7 +101,7 @@ namespace SBC.Consensus
             return MakePayload(new PrepareRequest
             {
                 Nonce = Nonce,
-                NextConsensus = NextConsensus,
+                NextConsensus = ConsensusAddress,
                 TransactionHashes = TransactionHashes,
                 MinerTransaction = (MinerTransaction)Transactions[TransactionHashes[0]],
                 Signature = Signatures[MyIndex]

@@ -30,11 +30,14 @@ namespace SBC.Core
         /// 区块高度
         /// </summary>
         public uint Index;
+        /// <summary>
+        /// 共识随机数
+        /// </summary>
         public ulong ConsensusData;
         /// <summary>
-        /// 下一个区块的记账合约的散列值
+        /// 区块的记账合约的散列值（多签名兑现脚本散列值）
         /// </summary>
-        public UInt160 NextConsensus;
+        public UInt160 ConsensusAddress;
         /// <summary>
         /// 用于验证该区块的脚本
         /// </summary>
@@ -66,7 +69,7 @@ namespace SBC.Core
             }
         }
 
-        public virtual int Size => sizeof(uint) + PrevHash.Size + MerkleRoot.Size + sizeof(uint) + sizeof(uint) + sizeof(ulong) + NextConsensus.Size + 1 + Script.Size;
+        public virtual int Size => sizeof(uint) + PrevHash.Size + MerkleRoot.Size + sizeof(uint) + sizeof(uint) + sizeof(ulong) + ConsensusAddress.Size + 1 + Script.Size;
 
         public virtual void Deserialize(BinaryReader reader)
         {
@@ -83,7 +86,7 @@ namespace SBC.Core
             Timestamp = reader.ReadUInt32();
             Index = reader.ReadUInt32();
             ConsensusData = reader.ReadUInt64();
-            NextConsensus = reader.ReadSerializable<UInt160>();
+            ConsensusAddress = reader.ReadSerializable<UInt160>();
         }
 
         byte[] IScriptContainer.GetMessage()
@@ -97,7 +100,7 @@ namespace SBC.Core
                 return new[] { Script.ScriptHash };
             Header prev_header = Blockchain.Default.GetHeader(PrevHash);
             if (prev_header == null) throw new InvalidOperationException();
-            return new UInt160[] { prev_header.NextConsensus };
+            return new UInt160[] { prev_header.ConsensusAddress };
         }
 
         public virtual void Serialize(BinaryWriter writer)
@@ -114,7 +117,7 @@ namespace SBC.Core
             writer.Write(Timestamp);
             writer.Write(Index);
             writer.Write(ConsensusData);
-            writer.Write(NextConsensus);
+            writer.Write(ConsensusAddress);
         }
 
         public virtual JObject ToJson()
@@ -128,7 +131,7 @@ namespace SBC.Core
             json["time"] = Timestamp;
             json["index"] = Index;
             json["nonce"] = ConsensusData.ToString("x16");
-            json["nextconsensus"] = Wallet.ToAddress(NextConsensus);
+            json["nextconsensus"] = Wallet.ToAddress(ConsensusAddress);
             json["script"] = Script.ToJson();
             return json;
         }

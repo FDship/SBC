@@ -60,16 +60,21 @@ namespace SBC.SmartContract
                 ParameterList = parameterList
             };
         }
-
+        
         public static Contract CreateMultiSigContract(int m, params ECPoint[] publicKeys)
         {
             return new Contract
-            {
+            {            
                 Script = CreateMultiSigRedeemScript(m, publicKeys),
                 ParameterList = Enumerable.Repeat(ContractParameterType.Signature, m).ToArray()
             };
         }
-
+        /// <summary>
+        /// 创建多签名兑现脚本
+        /// </summary>
+        /// <param name="m"></param>
+        /// <param name="publicKeys"></param>
+        /// <returns></returns>
         public static byte[] CreateMultiSigRedeemScript(int m, params ECPoint[] publicKeys)
         {
             if (!(1 <= m && m <= publicKeys.Length && publicKeys.Length <= 1024))

@@ -415,7 +415,7 @@ namespace SBC.SmartContract
                     Timestamp = Blockchain.Default.GetHeader(Blockchain.Default.Height).Timestamp + Blockchain.SecondsPerBlock,
                     Index = Blockchain.Default.Height + 1,
                     ConsensusData = 0,
-                    NextConsensus = Blockchain.Default.GetHeader(Blockchain.Default.Height).NextConsensus,
+                    ConsensusAddress = Blockchain.Default.GetHeader(Blockchain.Default.Height).ConsensusAddress,
                     Script = new Witness
                     {
                         InvocationScript = new byte[0],

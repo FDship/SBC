@@ -43,7 +43,7 @@ namespace SBC.Consensus
             context.Transactions[tx.Hash] = tx;
             if (context.TransactionHashes.Length == context.Transactions.Count)
             {
-                if (Blockchain.GetConsensusAddress(Blockchain.Default.GetValidators(context.Transactions.Values).ToArray()).Equals(context.NextConsensus))
+                if (Blockchain.GetConsensusAddress(Blockchain.Default.GetValidators(context.Transactions.Values).ToArray()).Equals(context.ConsensusAddress))
                 {
                     Log($"send perpare response");
                     context.State |= ConsensusState.SignatureSent;
@@ -81,6 +81,9 @@ namespace SBC.Consensus
             return true;
         }
 
+        /// <summary>
+        /// 验证打包成块
+        /// </summary>
         private void CheckSignatures()
         {
             if (context.Signatures.Count(p => p != null) >= context.M && context.TransactionHashes.All(p => context.Transactions.ContainsKey(p)))
@@ -255,7 +258,7 @@ namespace SBC.Consensus
             context.State |= ConsensusState.RequestReceived;
             context.Timestamp = payload.Timestamp;
             context.Nonce = message.Nonce;
-            context.NextConsensus = message.NextConsensus;
+            context.ConsensusAddress = message.NextConsensus;
             context.TransactionHashes = message.TransactionHashes;
             context.Transactions = new Dictionary<UInt256, Transaction>();
             if (!Crypto.Default.VerifySignature(context.MakeHeader().GetHashData(), message.Signature, context.Validators[payload.ValidatorIndex].EncodePoint(false))) return;
@@ -305,7 +308,7 @@ namespace SBC.Consensus
                         transactions.Insert(0, CreateMinerTransaction(transactions, context.BlockIndex, context.Nonce));
                         context.TransactionHashes = transactions.Select(p => p.Hash).ToArray();
                         context.Transactions = transactions.ToDictionary(p => p.Hash);
-                        context.NextConsensus = Blockchain.GetConsensusAddress(Blockchain.Default.GetValidators(transactions).ToArray());
+                        context.ConsensusAddress = Blockchain.GetConsensusAddress(Blockchain.Default.GetValidators(transactions).ToArray());
                         context.Signatures[context.MyIndex] = context.MakeHeader().Sign(context.KeyPair);
                     }
                     SignAndRelay(context.MakePrepareRequest());

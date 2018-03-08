@@ -29,7 +29,7 @@ namespace SBC.Network.Payloads
                 Timestamp = block.Timestamp,
                 Index = block.Index,
                 ConsensusData = block.ConsensusData,
-                NextConsensus = block.NextConsensus,
+                ConsensusAddress = block.ConsensusAddress,
                 Script = block.Script,
                 TxCount = block.Transactions.Length,
                 Hashes = tree.ToHashArray(),

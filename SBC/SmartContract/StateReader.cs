@@ -543,7 +543,7 @@ namespace SBC.SmartContract
             {
                 BlockBase header = _interface.GetInterface<BlockBase>();
                 if (header == null) return false;
-                engine.EvaluationStack.Push(header.NextConsensus.ToArray());
+                engine.EvaluationStack.Push(header.ConsensusAddress.ToArray());
                 return true;
             }
             return false;

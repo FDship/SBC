@@ -36,7 +36,7 @@ namespace SBC.Core
                         Timestamp = Timestamp,
                         Index = Index,
                         ConsensusData = ConsensusData,
-                        NextConsensus = NextConsensus,
+                        ConsensusAddress = ConsensusAddress,
                         Script = Script
                     };
                 }
@@ -183,7 +183,7 @@ namespace SBC.Core
                 return false;
             if (completely)
             {
-                if (NextConsensus != Blockchain.GetConsensusAddress(Blockchain.Default.GetValidators(Transactions).ToArray()))
+                if (ConsensusAddress != Blockchain.GetConsensusAddress(Blockchain.Default.GetValidators(Transactions).ToArray()))
                     return false;
                 foreach (Transaction tx in Transactions)
                     if (!tx.Verify(Transactions.Where(p => !p.Hash.Equals(tx.Hash)))) return false;

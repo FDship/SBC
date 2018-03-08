@@ -72,7 +72,7 @@ namespace SBC.Core
             Timestamp = (new DateTime(2018, 2, 16, 0, 0, 0, DateTimeKind.Utc)).ToTimestamp(),
             Index = 0,
             ConsensusData = 2083236893, //向比特币致敬
-            NextConsensus = GetConsensusAddress(StandbyValidators),
+            ConsensusAddress = GetConsensusAddress(StandbyValidators),
             Script = new Witness
             {
                 InvocationScript = new byte[0],
