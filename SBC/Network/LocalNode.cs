@@ -162,7 +162,10 @@ namespace SBC.Network
                         InventoryReceived(this, tx);
             }
         }
-
+        /// <summary>
+        /// 从现有列表中移除
+        /// </summary>
+        /// <param name="hashes"></param>
         public static void AllowHashes(IEnumerable<UInt256> hashes)
         {
             lock (KnownHashes)

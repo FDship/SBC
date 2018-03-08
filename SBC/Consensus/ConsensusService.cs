@@ -327,7 +327,10 @@ namespace SBC.Consensus
             SignAndRelay(context.MakeChangeView());
             CheckExpectedView(context.ExpectedView[context.MyIndex]);
         }
-
+        /// <summary>
+        /// 签名消息并发送
+        /// </summary>
+        /// <param name="payload"></param>
         private void SignAndRelay(ConsensusPayload payload)
         {
             ContractParametersContext sc;
