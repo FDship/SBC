@@ -347,6 +347,39 @@ namespace SBC.Core
                 return _validators.ToArray();
             }
         }
+       
+        public ECPoint[] AddValidator(ECPoint pubkey )
+        {
+            lock (_validators)
+            {
+                if (_validators.Count == 0)
+                {
+                    _validators.AddRange(GetValidators(Enumerable.Empty<Transaction>()));
+                }
+                if (!_validators.Contains(pubkey))
+                {
+                    _validators.Add(pubkey);
+                    _validators.OrderBy(p => p);
+                }
+                return _validators.ToArray();
+            }
+        }
+        public ECPoint[] RemoveValidator(ECPoint pubkey)
+        {
+            lock (_validators)
+            {
+                if (_validators.Count == 0)
+                {
+                    _validators.AddRange(GetValidators(Enumerable.Empty<Transaction>()));
+                }
+                if (_validators.Contains(pubkey))
+                {
+                    _validators.Remove(pubkey);
+                    _validators.OrderBy(p => p);
+                }
+                return _validators.ToArray();
+            }
+        }
         /// <summary>
         /// 获取记账人列表
         /// </summary>

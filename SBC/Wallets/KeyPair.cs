@@ -73,19 +73,28 @@ namespace SBC.Wallets
         {
             using (Decrypt())
             {
+                //获取地址合约脚本哈希
                 UInt160 script_hash = Contract.CreateSignatureRedeemScript(PublicKey).ToScriptHash();
+                //获取地址
                 string address = Wallet.ToAddress(script_hash);
+                //获取地址摘要前四字节
                 byte[] addresshash = Encoding.ASCII.GetBytes(address).Sha256().Sha256().Take(4).ToArray();
+                //计算scrypt key
                 byte[] derivedkey = SCrypt.DeriveKey(Encoding.UTF8.GetBytes(passphrase), addresshash, N, r, p, 64);
                 byte[] derivedhalf1 = derivedkey.Take(32).ToArray();
                 byte[] derivedhalf2 = derivedkey.Skip(32).ToArray();
+                //aes加密
                 byte[] encryptedkey = XOR(PrivateKey, derivedhalf1).AES256Encrypt(derivedhalf2);
                 byte[] buffer = new byte[39];
+                //校验位
                 buffer[0] = 0x01;
                 buffer[1] = 0x42;
                 buffer[2] = 0xe0;
+                //将地址摘要前四字节写入缓存
                 Buffer.BlockCopy(addresshash, 0, buffer, 3, addresshash.Length);
+                //密文写入缓存
                 Buffer.BlockCopy(encryptedkey, 0, buffer, 7, encryptedkey.Length);
+                //base58加密
                 return buffer.Base58CheckEncode();
             }
         }

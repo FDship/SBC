@@ -141,20 +141,29 @@ namespace SBC.Wallets
         {
             if (nep2 == null) throw new ArgumentNullException(nameof(nep2));
             if (passphrase == null) throw new ArgumentNullException(nameof(passphrase));
+            //base58解密
             byte[] data = nep2.Base58CheckDecode();
+            //格式校验
             if (data.Length != 39 || data[0] != 0x01 || data[1] != 0x42 || data[2] != 0xe0)
                 throw new FormatException();
             byte[] addresshash = new byte[4];
+            //读取地址哈希
             Buffer.BlockCopy(data, 3, addresshash, 0, 4);
+            //计算scrypt key 这里结果和加密的 scrypt key需要相同
             byte[] derivedkey = SCrypt.DeriveKey(Encoding.UTF8.GetBytes(passphrase), addresshash, N, r, p, 64);
             byte[] derivedhalf1 = derivedkey.Take(32).ToArray();
             byte[] derivedhalf2 = derivedkey.Skip(32).ToArray();
             byte[] encryptedkey = new byte[32];
             Buffer.BlockCopy(data, 7, encryptedkey, 0, 32);
+            //aes解密获取私钥
             byte[] prikey = XOR(encryptedkey.AES256Decrypt(derivedhalf2), derivedhalf1);
+            //计算公钥
             Cryptography.ECC.ECPoint pubkey = Cryptography.ECC.ECCurve.Secp256r1.G * prikey;
+            //获取账户合约脚本哈希
             UInt160 script_hash = Contract.CreateSignatureRedeemScript(pubkey).ToScriptHash();
+            //计算地址
             string address = ToAddress(script_hash);
+            //验证解密结果
             if (!Encoding.ASCII.GetBytes(address).Sha256().Sha256().Take(4).SequenceEqual(addresshash))
                 throw new FormatException();
             return prikey;
