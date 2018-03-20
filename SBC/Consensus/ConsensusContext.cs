@@ -28,6 +28,7 @@ namespace SBC.Consensus
         /// 区块的记账合约的散列值（多签名兑现脚本散列值）
         /// </summary>
         public UInt160 ConsensusAddress;
+        
         public UInt256[] TransactionHashes;
         public Dictionary<UInt256, Transaction> Transactions;
         public byte[][] Signatures;
@@ -36,7 +37,6 @@ namespace SBC.Consensus
         /// </summary>
         public byte[] ExpectedView;
         public KeyPair KeyPair;
-
         public int M => Validators.Length - (Validators.Length - 1) / 3;
 
         public void ChangeView(byte view_number)
@@ -50,6 +50,7 @@ namespace SBC.Consensus
                 TransactionHashes = null;
                 Signatures = new byte[Validators.Length][];
             }
+            ExpectedView[MyIndex] = view_number;
             _header = null;
         }
 
@@ -143,3 +144,4 @@ namespace SBC.Consensus
         }
     }
 }
+

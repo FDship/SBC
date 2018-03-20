@@ -8,6 +8,7 @@ using System.Linq;
 using System.Numerics;
 using VMArray = SBC.VM.Types.Array;
 using VMBoolean = SBC.VM.Types.Boolean;
+
 namespace SBC.VM
 {
     public static class Helper

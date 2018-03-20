@@ -21,9 +21,6 @@ namespace SBC.Implementations.Blockchains.LevelDB
 
         private DB db;
         private Thread thread_persistence;
-        /// <summary>
-        /// 块头hash列表
-        /// </summary>
         private List<UInt256> header_index = new List<UInt256>();
         private Dictionary<UInt256, Header> header_cache = new Dictionary<UInt256, Header>();
         private Dictionary<UInt256, Block> block_cache = new Dictionary<UInt256, Block>();
@@ -37,6 +34,11 @@ namespace SBC.Implementations.Blockchains.LevelDB
         public override uint HeaderHeight => (uint)header_index.Count - 1;
         public override uint Height => current_block_height;
         public bool VerifyBlocks { get; set; } = true;
+
+        /// <summary>
+        /// Return true if haven't got valid handle
+        /// </summary>
+        public override bool IsDisposed => disposed;
 
         public LevelDBBlockchain(string path)
         {
@@ -136,6 +138,18 @@ namespace SBC.Implementations.Blockchains.LevelDB
                     new_block_event.Set();
             }
             return true;
+        }
+
+        public void AddBlockDirectly(Block block)
+        {
+            if (block.Index == header_index.Count)
+            {
+                WriteBatch batch = new WriteBatch();
+                OnAddHeader(block.Header, batch);
+                db.Write(WriteOptions.Default, batch);
+            }
+            Persist(block);
+            OnPersistCompleted(block);
         }
 
         protected internal override void AddHeaders(IEnumerable<Header> headers)
@@ -317,23 +331,15 @@ namespace SBC.Implementations.Blockchains.LevelDB
         {
             return GetTransaction(ReadOptions.Default, hash, out height);
         }
-        /// <summary>
-        /// 根据hash 获取交易+高度
-        /// </summary>
-        /// <param name="options"></param>
-        /// <param name="hash">哈希值</param>
-        /// <param name="height">高度</param>
-        /// <returns>交易</returns>
+
         private Transaction GetTransaction(ReadOptions options, UInt256 hash, out int height)
         {
             Slice value;
-           
-            if (db.TryGet(options, SliceBuilder.Begin(DataEntryPrefix.DATA_Transaction).Add(hash), out value))//通过hash获取高度+交易
+            if (db.TryGet(options, SliceBuilder.Begin(DataEntryPrefix.DATA_Transaction).Add(hash), out value))
             {
                 byte[] data = value.ToArray();
-               
-                height = data.ToInt32(0);//获得高度
-                return Transaction.DeserializeFrom(data, sizeof(uint));//获得交易
+                height = data.ToInt32(0);
+                return Transaction.DeserializeFrom(data, sizeof(uint));
             }
             else
             {

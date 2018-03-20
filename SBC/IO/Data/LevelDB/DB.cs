@@ -5,7 +5,10 @@ namespace SBC.IO.Data.LevelDB
     internal class DB : IDisposable
     {
         private IntPtr handle;
-
+         /// <summary>
+         /// Return true if haven't got valid handle
+         /// </summary>
+         public bool IsDisposed => handle == IntPtr.Zero;
         private DB(IntPtr handle)
         {
             this.handle = handle;

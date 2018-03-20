@@ -32,7 +32,10 @@ namespace SBC.Core
         /// 后备记账人列表
         /// </summary>
         public static readonly Cryptography.ECC.ECPoint[] StandbyValidators = Settings.Default.StandbyValidators.OfType<string>().Select(p => ECPoint.DecodePoint(p.HexToBytes(), ECCurve.Secp256r1)).ToArray();
-
+         /// <summary>
+         /// Return true if haven't got valid handle
+         /// </summary>
+         public abstract bool IsDisposed { get; }
 #pragma warning disable CS0612
         public static readonly RegisterTransaction GoverningToken = new RegisterTransaction
         {

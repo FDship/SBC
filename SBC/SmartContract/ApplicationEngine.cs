@@ -333,48 +333,48 @@ namespace SBC.SmartContract
             string api_name = Encoding.ASCII.GetString(CurrentContext.Script, CurrentContext.InstructionPointer + 2, length);
             switch (api_name)
             {
-                case "Neo.Runtime.CheckWitness":
+                case "SBC.Runtime.CheckWitness":
                 case "AntShares.Runtime.CheckWitness":
                     return 200;
-                case "Neo.Blockchain.GetHeader":
+                case "SBC.Blockchain.GetHeader":
                 case "AntShares.Blockchain.GetHeader":
                     return 100;
-                case "Neo.Blockchain.GetBlock":
+                case "SBC.Blockchain.GetBlock":
                 case "AntShares.Blockchain.GetBlock":
                     return 200;
-                case "Neo.Blockchain.GetTransaction":
+                case "SBC.Blockchain.GetTransaction":
                 case "AntShares.Blockchain.GetTransaction":
                     return 100;
-                case "Neo.Blockchain.GetAccount":
+                case "SBC.Blockchain.GetAccount":
                 case "AntShares.Blockchain.GetAccount":
                     return 100;
-                case "Neo.Blockchain.GetValidators":
+                case "SBC.Blockchain.GetValidators":
                 case "AntShares.Blockchain.GetValidators":
                     return 200;
-                case "Neo.Blockchain.GetAsset":
+                case "SBC.Blockchain.GetAsset":
                 case "AntShares.Blockchain.GetAsset":
                     return 100;
-                case "Neo.Blockchain.GetContract":
+                case "SBC.Blockchain.GetContract":
                 case "AntShares.Blockchain.GetContract":
                     return 100;
-                case "Neo.Transaction.GetReferences":
+                case "SBC.Transaction.GetReferences":
                 case "AntShares.Transaction.GetReferences":
-                case "Neo.Transaction.GetUnspentCoins":
+                case "SBC.Transaction.GetUnspentCoins":
                     return 200;
-                case "Neo.Account.SetVotes":
+                case "SBC.Account.SetVotes":
                 case "AntShares.Account.SetVotes":
                     return 1000;
-                case "Neo.Validator.Register":
+                case "SBC.Validator.Register":
                 case "AntShares.Validator.Register":
                     return 1000L * 100000000L / ratio;
-                case "Neo.Asset.Create":
+                case "SBC.Asset.Create":
                 case "AntShares.Asset.Create":
                     return 5000L * 100000000L / ratio;
-                case "Neo.Asset.Renew":
+                case "SBC.Asset.Renew":
                 case "AntShares.Asset.Renew":
                     return (byte)EvaluationStack.Peek(1).GetBigInteger() * 5000L * 100000000L / ratio;
-                case "Neo.Contract.Create":
-                case "Neo.Contract.Migrate":
+                case "SBC.Contract.Create":
+                case "SBC.Contract.Migrate":
                 case "AntShares.Contract.Create":
                 case "AntShares.Contract.Migrate":
                     long fee = 100L;
@@ -390,13 +390,13 @@ namespace SBC.SmartContract
                         fee += 500L;
                     }
                     return fee * 100000000L / ratio;
-                case "Neo.Storage.Get":
+                case "SBC.Storage.Get":
                 case "AntShares.Storage.Get":
                     return 100;
-                case "Neo.Storage.Put":
+                case "SBC.Storage.Put":
                 case "AntShares.Storage.Put":
                     return ((EvaluationStack.Peek(1).GetByteArray().Length + EvaluationStack.Peek(2).GetByteArray().Length - 1) / 1024 + 1) * 1000;
-                case "Neo.Storage.Delete":
+                case "SBC.Storage.Delete":
                 case "AntShares.Storage.Delete":
                     return 100;
                 default:

@@ -32,14 +32,14 @@ namespace SBC.SmartContract
             this.assets = assets.CreateSnapshot();
             this.contracts = contracts.CreateSnapshot();
             this.storages = storages.CreateSnapshot();
-            Register("Neo.Asset.Create", Asset_Create);
-            Register("Neo.Asset.Renew", Asset_Renew);
-            Register("Neo.Contract.Create", Contract_Create);
-            Register("Neo.Contract.Migrate", Contract_Migrate);
-            Register("Neo.Contract.GetStorageContext", Contract_GetStorageContext);
-            Register("Neo.Contract.Destroy", Contract_Destroy);
-            Register("Neo.Storage.Put", Storage_Put);
-            Register("Neo.Storage.Delete", Storage_Delete);
+            Register("SBC.Asset.Create", Asset_Create);
+            Register("SBC.Asset.Renew", Asset_Renew);
+            Register("SBC.Contract.Create", Contract_Create);
+            Register("SBC.Contract.Migrate", Contract_Migrate);
+            Register("SBC.Contract.GetStorageContext", Contract_GetStorageContext);
+            Register("SBC.Contract.Destroy", Contract_Destroy);
+            Register("SBC.Storage.Put", Storage_Put);
+            Register("SBC.Storage.Delete", Storage_Delete);
             #region Old AntShares APIs
             Register("AntShares.Asset.Create", Asset_Create);
             Register("AntShares.Asset.Renew", Asset_Renew);
