@@ -40,16 +40,7 @@ namespace SBC.SmartContract
             Register("SBC.Contract.Destroy", Contract_Destroy);
             Register("SBC.Storage.Put", Storage_Put);
             Register("SBC.Storage.Delete", Storage_Delete);
-            #region Old AntShares APIs
-            Register("AntShares.Asset.Create", Asset_Create);
-            Register("AntShares.Asset.Renew", Asset_Renew);
-            Register("AntShares.Contract.Create", Contract_Create);
-            Register("AntShares.Contract.Migrate", Contract_Migrate);
-            Register("AntShares.Contract.GetStorageContext", Contract_GetStorageContext);
-            Register("AntShares.Contract.Destroy", Contract_Destroy);
-            Register("AntShares.Storage.Put", Storage_Put);
-            Register("AntShares.Storage.Delete", Storage_Delete);
-            #endregion
+
         }
 
         public void Commit()

@@ -92,8 +92,8 @@ namespace SBC.Core
         private Dictionary<CultureInfo, string> _names;
         public string GetName(CultureInfo culture = null)
         {
-            if (AssetType == AssetType.GoverningToken) return "NEO";
-            if (AssetType == AssetType.UtilityToken) return "NeoGas";
+            if (AssetType == AssetType.GoverningToken) return "ShipStock";
+            if (AssetType == AssetType.UtilityToken) return "ShipCoin";
             if (_names == null)
             {
                 JObject name_obj;

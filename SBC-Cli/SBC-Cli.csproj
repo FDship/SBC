@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Copyright>2016-2017 The Neo Project</Copyright>
+    <AssemblyTitle>Neo.CLI</AssemblyTitle>
+    <Version>2.7.3</Version>
+    <Authors>The Neo Project</Authors>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>neo-cli</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>Neo.CLI</PackageId>
+    <RootNamespace>Neo</RootNamespace>
+    <Company>The Neo Project</Company>
+    <Product>Neo.CLI</Product>
+    <Description>Neo.CLI</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>False</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SBC\SBC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="e_sqlite3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="libleveldb.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

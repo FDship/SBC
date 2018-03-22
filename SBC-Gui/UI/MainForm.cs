@@ -346,8 +346,8 @@ namespace SBC.UI
                             }
                             else
                             {
-                                string asset_name = asset.Asset.AssetType == AssetType.GoverningToken ? "NEO" :
-                                                    asset.Asset.AssetType == AssetType.UtilityToken ? "NeoGas" :
+                                string asset_name = asset.Asset.AssetType == AssetType.GoverningToken ? "ShipStock" :
+                                                    asset.Asset.AssetType == AssetType.UtilityToken ? "ShipCoin" :
                                                     asset.Asset.GetName();
                                 listView2.Items.Add(new ListViewItem(new[]
                                 {
@@ -729,7 +729,7 @@ namespace SBC.UI
 
         private void 官网WToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://neo.org/");
+            Process.Start("http://www.fdship.com/");
         }
 
         private void 开发人员工具TToolStripMenuItem_Click(object sender, EventArgs e)

@@ -58,7 +58,7 @@ namespace SBC.UI
                         }
                     }
                 };
-                label3.Text = $"{tx.SystemFee} gas";
+                label3.Text = $"{tx.SystemFee} ShipCoin";
             }
         }
     }

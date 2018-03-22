@@ -54,7 +54,7 @@ namespace SBC.Core
         {
             JObject json = base.ToJson();
             json["script"] = Script.ToHexString();
-            json["gas"] = Gas.ToString();
+            json["shipcoin"] = Gas.ToString();
             return json;
         }
 

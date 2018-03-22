@@ -11,7 +11,7 @@ namespace SBC.Core
     public abstract class BlockBase : IVerifiable
     {
         /// <summary>
-        /// 区块版本
+        /// 区块版本 
         /// </summary>
         public uint Version;
         /// <summary>

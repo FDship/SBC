@@ -130,56 +130,7 @@ namespace SBC.SmartContract
             Register("SBC.Iterator.Next", Iterator_Next);
             Register("SBC.Iterator.Key", Iterator_Key);
             Register("SBC.Iterator.Value", Iterator_Value);
-            #region Old AntShares APIs
-            Register("AntShares.Runtime.CheckWitness", Runtime_CheckWitness);
-            Register("AntShares.Runtime.Notify", Runtime_Notify);
-            Register("AntShares.Runtime.Log", Runtime_Log);
-            Register("AntShares.Blockchain.GetHeight", Blockchain_GetHeight);
-            Register("AntShares.Blockchain.GetHeader", Blockchain_GetHeader);
-            Register("AntShares.Blockchain.GetBlock", Blockchain_GetBlock);
-            Register("AntShares.Blockchain.GetTransaction", Blockchain_GetTransaction);
-            Register("AntShares.Blockchain.GetAccount", Blockchain_GetAccount);
-            Register("AntShares.Blockchain.GetValidators", Blockchain_GetValidators);
-            Register("AntShares.Blockchain.GetAsset", Blockchain_GetAsset);
-            Register("AntShares.Blockchain.GetContract", Blockchain_GetContract);
-            Register("AntShares.Header.GetHash", Header_GetHash);
-            Register("AntShares.Header.GetVersion", Header_GetVersion);
-            Register("AntShares.Header.GetPrevHash", Header_GetPrevHash);
-            Register("AntShares.Header.GetMerkleRoot", Header_GetMerkleRoot);
-            Register("AntShares.Header.GetTimestamp", Header_GetTimestamp);
-            Register("AntShares.Header.GetConsensusData", Header_GetConsensusData);
-            Register("AntShares.Header.GetNextConsensus", Header_GetNextConsensus);
-            Register("AntShares.Block.GetTransactionCount", Block_GetTransactionCount);
-            Register("AntShares.Block.GetTransactions", Block_GetTransactions);
-            Register("AntShares.Block.GetTransaction", Block_GetTransaction);
-            Register("AntShares.Transaction.GetHash", Transaction_GetHash);
-            Register("AntShares.Transaction.GetType", Transaction_GetType);
-            Register("AntShares.Transaction.GetAttributes", Transaction_GetAttributes);
-            Register("AntShares.Transaction.GetInputs", Transaction_GetInputs);
-            Register("AntShares.Transaction.GetOutputs", Transaction_GetOutputs);
-            Register("AntShares.Transaction.GetReferences", Transaction_GetReferences);
-            Register("AntShares.Attribute.GetUsage", Attribute_GetUsage);
-            Register("AntShares.Attribute.GetData", Attribute_GetData);
-            Register("AntShares.Input.GetHash", Input_GetHash);
-            Register("AntShares.Input.GetIndex", Input_GetIndex);
-            Register("AntShares.Output.GetAssetId", Output_GetAssetId);
-            Register("AntShares.Output.GetValue", Output_GetValue);
-            Register("AntShares.Output.GetScriptHash", Output_GetScriptHash);
-            Register("AntShares.Account.GetScriptHash", Account_GetScriptHash);
-            Register("AntShares.Account.GetVotes", Account_GetVotes);
-            Register("AntShares.Account.GetBalance", Account_GetBalance);
-            Register("AntShares.Asset.GetAssetId", Asset_GetAssetId);
-            Register("AntShares.Asset.GetAssetType", Asset_GetAssetType);
-            Register("AntShares.Asset.GetAmount", Asset_GetAmount);
-            Register("AntShares.Asset.GetAvailable", Asset_GetAvailable);
-            Register("AntShares.Asset.GetPrecision", Asset_GetPrecision);
-            Register("AntShares.Asset.GetOwner", Asset_GetOwner);
-            Register("AntShares.Asset.GetAdmin", Asset_GetAdmin);
-            Register("AntShares.Asset.GetIssuer", Asset_GetIssuer);
-            Register("AntShares.Contract.GetScript", Contract_GetScript);
-            Register("AntShares.Storage.GetContext", Storage_GetContext);
-            Register("AntShares.Storage.Get", Storage_Get);
-            #endregion
+           
         }
 
         internal bool CheckStorageContext(StorageContext context)
