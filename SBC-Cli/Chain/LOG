@@ -1,5 +1,5 @@
-2018/03/22-16:45:46.825 4ec Recovering log #3
-2018/03/22-16:45:46.825 4ec Level-0 table #5: started
-2018/03/22-16:45:46.826 4ec Level-0 table #5: 1684 bytes OK
-2018/03/22-16:45:46.830 4ec Delete type=0 #3
-2018/03/22-16:45:46.830 4ec Delete type=3 #2
+2018/03/22-20:42:53.216 31a0 Recovering log #6
+2018/03/22-20:42:53.216 31a0 Level-0 table #8: started
+2018/03/22-20:42:53.217 31a0 Level-0 table #8: 1842 bytes OK
+2018/03/22-20:42:53.220 31a0 Delete type=0 #6
+2018/03/22-20:42:53.220 31a0 Delete type=3 #4
