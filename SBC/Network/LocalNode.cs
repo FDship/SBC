@@ -82,7 +82,7 @@ namespace SBC.Network
                     Name = "LocalNode.AddTransactionLoop"
                 };
             }
-            this.UserAgent = string.Format("/NEO:{0}/", GetType().GetTypeInfo().Assembly.GetName().Version.ToString(3));
+            this.UserAgent = string.Format("/SBC:{0}/", GetType().GetTypeInfo().Assembly.GetName().Version.ToString(3));
             Blockchain.PersistCompleted += Blockchain_PersistCompleted;
         }
 
@@ -607,9 +607,9 @@ namespace SBC.Network
                         {
                             LocalAddresses.Add(await UPnP.GetExternalIPAsync());
                             if (port > 0)
-                                await UPnP.ForwardPortAsync(port, ProtocolType.Tcp, "NEO");
+                                await UPnP.ForwardPortAsync(port, ProtocolType.Tcp, "SBC");
                             if (ws_port > 0)
-                                await UPnP.ForwardPortAsync(ws_port, ProtocolType.Tcp, "NEO WebSocket");
+                                await UPnP.ForwardPortAsync(ws_port, ProtocolType.Tcp, "SBC WebSocket");
                         }
                         catch { }
                     }

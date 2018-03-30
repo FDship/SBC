@@ -19,7 +19,7 @@ namespace SBC.UI.Wrappers
         {
             base.InitializeDialog(openFileDialog);
             openFileDialog.DefaultExt = "avm";
-            openFileDialog.Filter = "NeoContract|*.avm";
+            openFileDialog.Filter = "SBCContract|*.avm";
         }
     }
 }

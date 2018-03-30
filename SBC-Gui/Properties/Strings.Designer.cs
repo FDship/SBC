@@ -70,7 +70,7 @@ namespace SBC.Properties {
         }
         
         /// <summary>
-        ///   查找类似 NEO 的本地化字符串。
+        ///   查找类似 SBC 的本地化字符串。
         /// </summary>
         internal static string AboutMessage {
             get {
@@ -241,7 +241,7 @@ namespace SBC.Properties {
         }
         
         /// <summary>
-        ///   查找类似 NEO must install Onchain root certificate to validate assets on the blockchain, install it now? 的本地化字符串。
+        ///   查找类似 SBC must install Onchain root certificate to validate assets on the blockchain, install it now? 的本地化字符串。
         /// </summary>
         internal static string InstallCertificateText {
             get {

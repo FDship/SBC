@@ -204,7 +204,7 @@
     <value>194, 22</value>
   </data>
   <data name="提取小蚁币CToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;NeoGas Claim...</value>
+    <value>&amp;ShipCoin Claim...</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 6</value>
@@ -316,7 +316,7 @@
     <value>194, 22</value>
   </data>
   <data name="关于AntSharesToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;About NEO</value>
+    <value>&amp;About ShiCoin</value>
   </data>
   <data name="帮助HToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 21</value>
@@ -358,13 +358,13 @@
     <value>300</value>
   </data>
   <data name="columnHeader4.Text" xml:space="preserve">
-    <value>NEO</value>
+    <value>SBC</value>
   </data>
   <data name="columnHeader4.Width" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
   <data name="columnHeader11.Text" xml:space="preserve">
-    <value>NeoGas</value>
+    <value>ShipCoin</value>
   </data>
   <data name="columnHeader11.Width" type="System.Int32, mscorlib">
     <value>120</value>
@@ -1200,7 +1200,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>neo-gui</value>
+    <value>sbc-gui</value>
   </data>
   <data name="&gt;&gt;钱包WToolStripMenuItem.Name" xml:space="preserve">
     <value>钱包WToolStripMenuItem</value>
